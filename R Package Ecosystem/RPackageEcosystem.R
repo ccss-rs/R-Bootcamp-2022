@@ -29,3 +29,35 @@ randomForest::outlier() # Will use the outlier function from the randomForest pa
 ?combine
 
 ## Using the CRAN documentation for randomForest and psych, we will run some functions.
+install.packages("ggplot2")
+library(ggplot2)
+data=head(mtcars, 30)
+ggplot(data, aes(x=wt, y=mpg)) +
+  geom_point() + # Show dots
+  geom_label(
+    label=rownames(data), 
+    nudge_x = 0.25, nudge_y = 0.25, 
+    check_overlap = T
+  )
+
+ggplot(mtcars, aes(wt, mpg, colour = factor(cyl), shape = factor(vs) )) +
+  geom_point()
+
+
+ggplot( mtcars , aes(x=mpg, y=wt, color=as.factor(cyl)  )) + 
+  geom_point(size=3) +  
+  facet_wrap(~cyl , dir="v")  +
+  theme(legend.position="none") 
+
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered.csv", header=T)
+data$date <- as.Date(data$date)
+
+data %>%
+  tail(10) %>%
+  ggplot( aes(x=date, y=value)) +
+  geom_line( color="grey") +
+  geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
+  theme_ipsum() +
+  ggtitle("Evolution of bitcoin price")
+
+
