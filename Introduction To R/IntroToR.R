@@ -63,6 +63,21 @@ ls(FALSE)
 ## Notice how you can get the mean() function 
 me
 
+#Import sample dataset. 
+mydata <- mtcars
+#description of mtcars dataset https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars
+view(mydata)
+#Perform T test. Compare average MPG between automatic and manual cars. 
+t.test(mpg ~ am, data = mydata)
+#Chisquared test. Is there association between auto or manual cars and how many forward gears they have?
+#1 is manual, 0 is automatic. 
+table(mydata$am, mydata$gear)
+chisq.test(mydata$am, mydata$gear)
+#Manual cars tend to have more forward gears, auto 
+#Perform regression
+lm(mpg ~ wt + hp, data = mydata)
+
+
 ### Challenge 1: Variable Assignment
 ### 1. Define three variables and then write a mathematical expression using only those variables.
 ### 2. Using the round() function, round 3.14159 to the second decimal place. Hint: Use ?round if you need help on the function definition.
