@@ -64,5 +64,11 @@ data %>%
   theme_ipsum() +
   ggtitle("Evolution of bitcoin price")
 
+#Exercise
+#install caTools
+#load package caTools
+#look up help documentation glm function
+#Perform logistic regression
+
 
 
