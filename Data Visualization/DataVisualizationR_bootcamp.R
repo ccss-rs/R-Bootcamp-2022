@@ -261,3 +261,31 @@ tweets %>%
    plot_ly(lat = ~lat, lon = ~long, type='scattergeo') %>% ## Note: The %>% operator is used to add additional layers.
   layout(geo=g)
 
+#Exercise. Bring it all together with tidyverse and ggplot
+#Load gapminder data. Also load ggplot2 and tidyverse packages
+library(gapminder)
+library(ggplot2)
+library(tidyverse)
+#filter gapminder data to only be 1952. Then create a scatterplot of population and life expectancy
+gapminder %>%
+  filter(year == 1952) %>%
+    ggplot(aes(x = pop, y = lifeExp)) +
+    geom_point()
+#Using code from above. Add color=continent in aes section. scale_x_log10() at bottom to adjust graph appearance. 
+gapminder %>%
+  filter(year == 1952) %>%
+    ggplot(aes(x=pop, y=lifeExp, color = continent)) +
+    geom_point() +
+    scale_x_log10()
+#Change graph to target all years. Create scatterplot of gdp percentage and life expectancy. apply facet by year variable to show all years split on same graph
+ggplot(gapminder, aes(x=gdpPercap, y=lifeExp)) +
+  geom_point() +
+  scale_x_log10() +
+  facet_wrap(~year)
+#Using ggplot and tidyverse, plot gapminder 1952 data, grouped by continent Summarize median life expectancy and plot using geom_col()
+gapminder %>%
+  filter(year == 1952) %>%
+  group_by(continent) %>%
+  summarize(medianlifeExp = median(lifeExp)) %>%
+    ggplot(aes(x=continent, y=medianlifeExp)) +
+    geom_col()
